@@ -72,3 +72,35 @@ func Base36Decode(s, alphabet string) []byte {
 	copy(val[numZeros:], tmpval)
 	return val
 }
+
+// ValidBase36
+func ValidBase36(s string) bool {
+	if validBase36Lower(s) == false {
+		return validBase36Upper(s)
+	}
+	return true
+}
+
+// validBase36Lower a-z 97-122
+func validBase36Lower(s string) bool {
+	for _, c := range s {
+		i := uint64(c)
+		// 0-9 or a-z
+		if i < 48 || (i > 57 && i < 97) || i > 123 {
+			return false
+		}
+	}
+	return true
+}
+
+// validBase36Upper A-Z 65-90
+func validBase36Upper(s string) bool {
+	for _, c := range s {
+		i := uint64(c)
+		// 0-9 or A-Z
+		if i < 48 || (i > 57 && i < 65) || i > 90 {
+			return false
+		}
+	}
+	return true
+}
